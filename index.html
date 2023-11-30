@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crime Statistics Visualization</title>
+    <!-- Load D3.js from CDN -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+
+<div class="visualization-container">
+
+    <h3 style="text-align: center; text-decoration: underline;">Crime Counts with Arrest Trends over the Years/Districts</h3>
+    <div id="dropdowns">
+        <label for="xAxisSelect">Select Year/District:</label>
+        <select id="xAxisSelect">
+            <option value="year">Year</option>
+            <option value="district">District</option>
+        </select>
+
+        <label for="yAxisSelect">Select Attribute:</label>
+        <select id="yAxisSelect">
+            <option value="totalIncidents">Crime Counts</option>
+            <option value="arrests">Arrests</option>
+            <option value="notArrests">Not Arrests</option>
+        </select>
+    </div>
+
+    <div id="bar-chart" class="chart-block"></div>
+    <div id="tooltip" class="tooltip"></div>
+    <h3 style="text-align: center; text-decoration: underline;">Linked visualisation</h3>
+    <div id="radioButtons">
+        <input type="radio" id="defaultView" name="viewSwitch" value="default" checked>
+        <label for="defaultView">Crime-type/district</label>
+        <input type="radio" id="linkedVis2View" name="viewSwitch" value="linkedVis2">
+        <label for="linkedVis2View">Year/Crime-type</label>
+    </div>
+    
+    <div id="test" >
+            <div id="test1">
+                
+                <h5>Crime Counts with Arrest Trends for Top Crime Types</h5>
+                <label for="dataTypeSelect">Select Attribute:</label>
+                <select id="dataTypeSelect">
+                    <option value="all">Crime Counts</option>
+                    <option value="True">Arrests</option>
+                    <option value="False">Not Arrests</option>
+                </select>
+            
+                <div id="bar-chart1" class="chart-block">
+                    
+                </div>
+                <h5>Community Areas for Selected Crime Type</h5>
+                <div id="dot-chart" class="chart-block">
+                    
+                </div>
+            </div>
+            <div id="Linkedvis2" style="display: none;">
+            </div>
+        </div>
+        
+
+</div>
+
+</div>
+
+<div id="vis" >
+    <h3 style="text-align: center;margin-bottom: 5%;margin-top: 5%;text-decoration: underline;">Multi-Linked Spatial visualisation</h3>
+    <div class="visualization" id="vis1"></div>
+    <div class="visualization" id="vis2"></div>
+  </div>
+  <script src="./spectial.js">
+  </script>
+    <script src="./LinkedVis2.js">
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var radioButtons = document.querySelectorAll('input[type=radio][name="viewSwitch"]');
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', switchView);
+        });
+    });
+
+    function switchView(event) {
+        var test1Div = document.getElementById('test1');
+        var linkedVis2Div = document.getElementById('Linkedvis2');
+        if (event.target.value === 'linkedVis2') {
+            // Hide 'test1' div and show 'Linkedvis2' div
+            test1Div.style.display = 'none';
+            linkedVis2Div.style.display = 'block';
+        } else {
+            // Show 'test1' div and hide 'Linkedvis2' div
+            test1Div.style.display = 'block';
+            linkedVis2Div.style.display = 'none';
+        }
+    }
+</script>
+
+
+<script src="script.js"></script>
+<script src="LinkedVis.js"></script>
+
+</body>
+</html>
